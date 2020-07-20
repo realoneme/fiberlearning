@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="progress-bar" style="background: lightblue;width:0px;height:20px"></div>
+    <button id="btn">开始</button>
+    <script>
+        //raf(requestAnimationFrame)の使い方
+        // ページにprogress barを作って、イベントを発火して、progress barは　0％　から　100％　になる
+        let btn = document.getElementById('btn');
+        let oDiv = document.getElementById('progress-bar');
+        let start;
+        function progress() {
+            // DivのStyleを作る
+            // Divの幅を1回ごとに１pxを増加する
+            oDiv.style.width = oDiv.offsetWidth + 1 + 'px';
+            //　HTMLの内容を書く
+            oDiv.innerHTML = (oDiv.offsetWidth) + '%';
+            // Divの幅は100px以下の時、以下のif文を実行する
+            if (oDiv.offsetWidth < 100) {
+                // 現在の時間（ミリ秒）
+                let current = Date.now();
+                // プリントしたのは　準備から開始までの時間。
+                // これは毎回rafを実行、どのくらいかかる
+                console.log(current - start);
+                // 毎回start時間を今の時間になる
+                start = current;
+                // requestAnimationFrameのcallback関数はprogress自身。
+                // 毎回progressをする時、必ずrafを実行する。
+                requestAnimationFrame(progress);
+            }
+        }
+        btn.addEventListener('click', () => {
+            oDiv.style.width = 0;//DIVの幅0にする
+            let current = Date.now();//現時点を得る
+            // 開始時間を現時点にする。
+            start = current;
+            // 関数を実行
+            requestAnimationFrame(progress);
+        });
+    </script>
+</body>
+
+</html>
