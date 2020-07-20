@@ -18,7 +18,7 @@ Reactのレンダ原理は同じです。ブラウザに処理されるコード
 2. SetTimeOutとSetIntervalを処理。
 3. ページイベントを処理。（begin frame）
 4. requestAnimationFrame callbackを処理
-5. レンダを始める：Layoutを処理
-6. Paintが終わってレンダ終了。
+5. レンダ開始：Layoutの処理開始。
+6. レンダ終了:Paintの処理完了。
 
 
